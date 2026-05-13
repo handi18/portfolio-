@@ -3,10 +3,12 @@
    ============================================================ */
 
 // ── Cached DOM References ─────────────────────────────────────
-const navbar     = document.querySelector('.navbar');
-const menuToggle = document.querySelector('.menu-toggle');
-const navLinks   = document.querySelector('.nav-links');
-const menuIcon   = menuToggle.querySelector('i');
+const navbar       = document.querySelector('.navbar');
+const menuToggle   = document.querySelector('.menu-toggle');
+const navLinks     = document.querySelector('.nav-links');
+const menuIcon     = menuToggle.querySelector('i');
+const themeToggle  = document.getElementById('theme-toggle');
+const toggleLabel  = themeToggle.querySelector('.theme-toggle-label');
 
 // ── Mobile Menu Toggle ────────────────────────────────────────
 menuToggle.addEventListener('click', () => {
@@ -26,11 +28,16 @@ navLinks.querySelectorAll('a').forEach(link => {
 });
 
 // ── Navbar Scroll Styling ─────────────────────────────────────
-window.addEventListener('scroll', () => {
-    const scrolled = window.scrollY > 50;
-    navbar.style.background   = scrolled ? 'rgba(1, 1, 2, 0.95)' : 'rgba(1, 1, 2, 0.8)';
+function updateNavbarScroll() {
+    const scrolled   = window.scrollY > 50;
+    const isLight    = document.documentElement.dataset.theme === 'light';
+    const darkBg     = scrolled ? 'rgba(1,1,2,0.95)' : 'rgba(1,1,2,0.8)';
+    const lightBg    = scrolled ? 'rgba(245,245,244,0.97)' : 'rgba(245,245,244,0.85)';
+    navbar.style.background   = isLight ? lightBg : darkBg;
     navbar.style.borderBottom = scrolled ? '1px solid var(--hairline)' : '1px solid transparent';
-}, { passive: true });
+}
+
+window.addEventListener('scroll', updateNavbarScroll, { passive: true });
 
 // ── Active Nav Link Highlight ─────────────────────────────────
 const sections = document.querySelectorAll('section[id], footer[id]');
@@ -55,6 +62,19 @@ function updateActiveNav() {
 
 window.addEventListener('scroll', updateActiveNav, { passive: true });
 
+// ── Theme Toggle ──────────────────────────────────────────────
+function applyTheme(theme) {
+    document.documentElement.dataset.theme = theme;
+    toggleLabel.textContent = theme === 'light' ? 'Dark' : 'Light';
+    localStorage.setItem('portfolio-theme', theme);
+    updateNavbarScroll();
+}
+
+themeToggle.addEventListener('click', () => {
+    const current = document.documentElement.dataset.theme;
+    applyTheme(current === 'light' ? 'dark' : 'light');
+});
+
 // ── Scroll Reveal Animation ───────────────────────────────────
 function revealOnScroll() {
     const threshold = 80; // px from bottom of viewport
@@ -69,6 +89,10 @@ window.addEventListener('scroll', revealOnScroll, { passive: true });
 
 // ── Initialisation (runs once DOM + resources are ready) ──────
 window.addEventListener('load', () => {
+    // Restore saved theme preference
+    const savedTheme = localStorage.getItem('portfolio-theme') || 'dark';
+    applyTheme(savedTheme);
+
     // Apply staggered transition delays
     document.querySelectorAll('.hero .reveal').forEach((el, i) => {
         el.style.transitionDelay = `${i * 0.08}s`;
