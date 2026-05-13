@@ -1,26 +1,39 @@
-/* 
-   Linear Design System Portfolio Template 
-   Color Palette: Deep Dark Canvas, Precise Typography
-*/
+/*
+ * ============================================================
+ * Linear Design System — Portfolio Handialrizky
+ * Color Palette: Deep Dark Canvas, Precise Typography
+ * ============================================================
+ */
 
+/* ============================================================
+   CSS CUSTOM PROPERTIES (DESIGN TOKENS)
+   ============================================================ */
 :root {
-    --canvas: #010102;
-    --surface-1: #0f1011;
-    --surface-2: #141516;
-    --hairline: #23252a;
-    
-    /* User requested keeping original accent */
+    /* Surfaces */
+    --canvas:      #010102;
+    --surface-1:   #0f1011;
+    --surface-2:   #141516;
+    --hairline:    #23252a;
+
+    /* Accent */
     --accent-primary: #0ea5e9;
-    --accent-hover: #38bdf8; 
-    
-    --ink: #f7f8f8;
-    --ink-muted: #d0d6e0;
+    --accent-hover:   #38bdf8;
+
+    /* Text */
+    --ink:        #f7f8f8;
+    --ink-muted:  #d0d6e0;
     --ink-subtle: #8a8f98;
-    
+
+    /* Motion */
     --transition: all 0.2s ease;
 }
 
-* {
+/* ============================================================
+   RESET & BASE
+   ============================================================ */
+*,
+*::before,
+*::after {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
@@ -35,39 +48,47 @@ html {
 body {
     background-color: var(--canvas);
     color: var(--ink);
-    line-height: 1.5;
+    line-height: 1.6;
     overflow-x: hidden;
-    letter-spacing: -0.05px;
+    letter-spacing: -0.01em;
 }
 
-/* Container & Typography */
+/* ============================================================
+   LAYOUT UTILITIES
+   ============================================================ */
 .container {
     max-width: 1100px;
     margin: 0 auto;
     padding: 0 2rem;
 }
 
-h1, h2, h3 {
+.section {
+    padding: 100px 0;
+}
+
+/* ============================================================
+   TYPOGRAPHY
+   ============================================================ */
+h1,
+h2,
+h3 {
     line-height: 1.15;
     margin-bottom: 1rem;
     font-weight: 600;
     color: var(--ink);
 }
 
-.section {
-    padding: 100px 0;
-}
-
 .section-title {
     font-size: 2.5rem;
     margin-bottom: 3rem;
     text-align: center;
-    position: relative;
-    letter-spacing: -1.0px;
+    letter-spacing: -1px;
     color: var(--ink);
 }
 
-/* Surface Utilities */
+/* ============================================================
+   SURFACE / CARD
+   ============================================================ */
 .card-glass {
     background: var(--surface-1);
     border: 1px solid var(--hairline);
@@ -80,7 +101,9 @@ h1, h2, h3 {
     background: var(--surface-2);
 }
 
-/* Navbar */
+/* ============================================================
+   NAVBAR
+   ============================================================ */
 .navbar {
     position: fixed;
     top: 0;
@@ -106,7 +129,7 @@ h1, h2, h3 {
     font-weight: 600;
     color: var(--ink);
     text-decoration: none;
-    letter-spacing: -1.0px;
+    letter-spacing: -1px;
 }
 
 .nav-links {
@@ -123,30 +146,34 @@ h1, h2, h3 {
     transition: var(--transition);
 }
 
-.nav-links a:hover {
+.nav-links a:hover,
+.nav-links a.active {
     color: var(--ink);
 }
 
+/* Menu toggle (mobile) */
 .menu-toggle {
     display: none;
+    background: none;
+    border: none;
     font-size: 1.2rem;
     cursor: pointer;
     color: var(--ink);
+    padding: 4px;
 }
 
-/* Hero Section */
+/* ============================================================
+   HERO
+   ============================================================ */
 .hero {
     min-height: 100vh;
     display: flex;
     align-items: center;
-    position: relative;
     padding-top: 64px;
 }
 
 .hero-content {
     max-width: 800px;
-    position: relative;
-    z-index: 2;
     margin: 0 auto;
     display: flex;
     flex-direction: column;
@@ -174,11 +201,11 @@ h1, h2, h3 {
 }
 
 .greeting {
-    font-size: 1rem;
-    color: var(--ink-muted);
+    font-size: 0.85rem;
+    color: var(--ink-subtle);
     font-weight: 500;
     margin-bottom: 1rem;
-    letter-spacing: 0.4px;
+    letter-spacing: 0.12em;
     text-transform: uppercase;
 }
 
@@ -187,23 +214,23 @@ h1, h2, h3 {
     font-weight: 600;
     color: var(--ink);
     margin-bottom: 0.5rem;
-    letter-spacing: -2.0px;
+    letter-spacing: -2px;
 }
 
 .role {
-    font-size: clamp(1.2rem, 3vw, 1.8rem);
+    font-size: clamp(1.1rem, 3vw, 1.5rem);
     color: var(--ink-muted);
     font-weight: 400;
     margin-bottom: 1.5rem;
-    letter-spacing: -0.6px;
+    letter-spacing: -0.5px;
 }
 
 .summary {
-    font-size: 1.1rem;
+    font-size: 1rem;
     color: var(--ink-muted);
-    max-width: 600px;
+    max-width: 560px;
     margin-bottom: 2.5rem;
-    letter-spacing: -0.1px;
+    line-height: 1.7;
 }
 
 .hero-buttons {
@@ -211,19 +238,22 @@ h1, h2, h3 {
     gap: 1rem;
 }
 
+/* ============================================================
+   BUTTONS
+   ============================================================ */
 .btn {
     display: inline-flex;
     align-items: center;
     justify-content: center;
     gap: 8px;
-    padding: 8px 14px;
+    padding: 8px 16px;
     border-radius: 8px;
     font-weight: 500;
-    text-decoration: none;
-    transition: var(--transition);
-    cursor: pointer;
     font-size: 14px;
+    text-decoration: none;
     border: 1px solid transparent;
+    cursor: pointer;
+    transition: var(--transition);
 }
 
 .btn-primary {
@@ -245,13 +275,34 @@ h1, h2, h3 {
     background: var(--surface-2);
 }
 
-/* Timeline (Pendidikan & Pengalaman) */
+/* ============================================================
+   ABOUT
+   ============================================================ */
+.about-content {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.about-text p {
+    color: var(--ink-muted);
+    font-size: 1rem;
+    line-height: 1.8;
+}
+
+.about-text p + p {
+    margin-top: 1rem;
+}
+
+/* ============================================================
+   TIMELINE (PENGALAMAN)
+   ============================================================ */
 .timeline {
     position: relative;
     max-width: 800px;
     margin: 0 auto;
 }
 
+/* Vertical line */
 .timeline::before {
     content: '';
     position: absolute;
@@ -266,7 +317,10 @@ h1, h2, h3 {
     position: relative;
     margin-bottom: 2rem;
     margin-left: 60px;
-    padding: 2rem;
+}
+
+.timeline-item:last-child {
+    margin-bottom: 0;
 }
 
 .timeline-dot {
@@ -284,47 +338,41 @@ h1, h2, h3 {
     color: var(--ink-subtle);
     font-weight: 500;
     margin-bottom: 0.5rem;
+    letter-spacing: 0.02em;
 }
 
 .timeline-title {
-    font-size: 1.2rem;
+    font-size: 1.1rem;
     color: var(--ink);
-    letter-spacing: -0.4px;
-}
-
-.timeline-subtitle {
-    font-size: 0.95rem;
-    color: var(--ink-muted);
-    margin-top: 0.25rem;
+    letter-spacing: -0.3px;
 }
 
 .timeline-desc {
-    margin-top: 1rem;
+    margin-top: 0.75rem;
     color: var(--ink-muted);
     font-size: 0.95rem;
+    line-height: 1.7;
 }
 
-/* Skills */
+/* ============================================================
+   SKILLS
+   ============================================================ */
 .skills-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     gap: 2rem;
 }
 
-.skill-category {
-    padding: 2rem;
-}
-
 .skill-icon {
-    font-size: 2rem;
-    color: var(--ink-muted);
-    margin-bottom: 1.5rem;
+    font-size: 1.5rem;
+    color: var(--accent-primary);
+    margin-bottom: 1.25rem;
 }
 
 .skill-category h3 {
-    margin-bottom: 1.5rem;
-    font-size: 1.4rem;
-    letter-spacing: -0.4px;
+    margin-bottom: 1.25rem;
+    font-size: 1.2rem;
+    letter-spacing: -0.3px;
 }
 
 .skill-list {
@@ -332,21 +380,25 @@ h1, h2, h3 {
 }
 
 .skill-list li {
-    margin-bottom: 1rem;
-    color: var(--ink-muted);
     display: flex;
     align-items: flex-start;
     gap: 10px;
+    margin-bottom: 0.875rem;
+    color: var(--ink-muted);
     font-size: 0.95rem;
+    line-height: 1.6;
 }
 
 .skill-list li i {
     color: var(--accent-primary);
     margin-top: 4px;
-    font-size: 0.8rem;
+    font-size: 0.75rem;
+    flex-shrink: 0;
 }
 
-/* Achievements */
+/* ============================================================
+   ACHIEVEMENTS
+   ============================================================ */
 .achievements-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -368,40 +420,51 @@ h1, h2, h3 {
 }
 
 .achievement-info {
-    padding: 2rem;
+    padding: 1.5rem 2rem 2rem;
     flex-grow: 1;
     display: flex;
     flex-direction: column;
 }
 
 .achievement-info h3 {
-    margin-bottom: 1rem;
-    font-size: 1.4rem;
-    letter-spacing: -0.4px;
+    margin-bottom: 0.75rem;
+    font-size: 1.2rem;
+    letter-spacing: -0.3px;
 }
 
 .achievement-info p {
     color: var(--ink-muted);
-    font-size: 0.95rem;
-    line-height: 1.6;
+    font-size: 0.9rem;
+    line-height: 1.7;
 }
 
-/* Footer */
+/* ============================================================
+   FOOTER / CONTACT
+   ============================================================ */
 footer {
-    padding: 4rem 0 2rem;
+    padding: 3rem 0;
     text-align: center;
 }
 
 .footer-content {
     padding: 4rem 2rem;
-    margin-bottom: 2rem;
+}
+
+.footer-content h2 {
+    font-size: 2rem;
+    letter-spacing: -0.8px;
+}
+
+.footer-content > p {
+    color: var(--ink-muted);
+    margin-top: 0.5rem;
 }
 
 .social-links {
     display: flex;
     justify-content: center;
     gap: 1rem;
-    margin: 2rem 0;
+    margin: 2rem 0 1.5rem;
 }
 
 .social-icon {
@@ -415,25 +478,29 @@ footer {
     color: var(--ink-muted);
     font-size: 1.1rem;
     text-decoration: none;
-    transition: var(--transition);
     border: 1px solid var(--hairline);
+    transition: var(--transition);
 }
 
 .social-icon:hover {
     background: var(--surface-2);
     color: var(--ink);
+    border-color: var(--accent-primary);
 }
 
 .copyright {
     color: var(--ink-subtle);
-    font-size: 0.85rem;
+    font-size: 0.8rem;
+    margin-top: 0;
 }
 
-/* Animations */
+/* ============================================================
+   SCROLL REVEAL ANIMATION
+   ============================================================ */
 .reveal {
     opacity: 0;
-    transform: translateY(10px);
-    transition: opacity 0.4s ease, transform 0.4s ease;
+    transform: translateY(12px);
+    transition: opacity 0.5s ease, transform 0.5s ease;
 }
 
 .reveal.active {
@@ -441,8 +508,19 @@ footer {
     transform: translateY(0);
 }
 
-/* Responsive Design */
+/* ============================================================
+   RESPONSIVE — MOBILE
+   ============================================================ */
 @media (max-width: 768px) {
+    .section {
+        padding: 72px 0;
+    }
+
+    .section-title {
+        font-size: 2rem;
+        margin-bottom: 2rem;
+    }
+
     .nav-links {
         display: none;
         position: absolute;
@@ -451,11 +529,12 @@ footer {
         width: 100%;
         background: var(--canvas);
         flex-direction: column;
-        padding: 2rem;
+        padding: 1.5rem 2rem;
         text-align: center;
+        gap: 1.25rem;
         border-bottom: 1px solid var(--hairline);
     }
-    
+
     .nav-links.active {
         display: flex;
     }
@@ -466,9 +545,17 @@ footer {
 
     .hero-buttons {
         flex-direction: column;
+        width: 100%;
     }
-    
+
     .btn {
         text-align: center;
+        width: 100%;
+        justify-content: center;
+    }
+
+    .skills-grid,
+    .achievements-grid {
+        grid-template-columns: 1fr;
     }
 }
