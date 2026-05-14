@@ -3,19 +3,19 @@
    ============================================================ */
 
 // ── Cached DOM References ─────────────────────────────────────
-const navbar       = document.querySelector('.navbar');
-const menuToggle   = document.querySelector('.menu-toggle');
-const navLinks     = document.querySelector('.nav-links');
-const menuIcon     = menuToggle.querySelector('i');
-const themeToggle  = document.getElementById('theme-toggle');
-const toggleLabel  = themeToggle.querySelector('.theme-toggle-label');
+const navbar = document.querySelector('.navbar');
+const menuToggle = document.querySelector('.menu-toggle');
+const navLinks = document.querySelector('.nav-links');
+const menuIcon = menuToggle.querySelector('i');
+const themeToggle = document.getElementById('theme-toggle');
+const toggleLabel = themeToggle.querySelector('.theme-toggle-label');
 
 // ── Mobile Menu Toggle ────────────────────────────────────────
 menuToggle.addEventListener('click', () => {
     const isOpen = navLinks.classList.toggle('active');
     menuToggle.setAttribute('aria-expanded', isOpen);
-    menuIcon.classList.toggle('fa-bars',  !isOpen);
-    menuIcon.classList.toggle('fa-times',  isOpen);
+    menuIcon.classList.toggle('fa-bars', !isOpen);
+    menuIcon.classList.toggle('fa-times', isOpen);
 });
 
 // Close mobile menu when a nav link is clicked
@@ -29,11 +29,11 @@ navLinks.querySelectorAll('a').forEach(link => {
 
 // ── Navbar Scroll Styling ─────────────────────────────────────
 function updateNavbarScroll() {
-    const scrolled   = window.scrollY > 50;
-    const isLight    = document.documentElement.dataset.theme === 'light';
-    const darkBg     = scrolled ? 'rgba(1,1,2,0.95)' : 'rgba(1,1,2,0.8)';
-    const lightBg    = scrolled ? 'rgba(245,245,244,0.97)' : 'rgba(245,245,244,0.85)';
-    navbar.style.background   = isLight ? lightBg : darkBg;
+    const scrolled = window.scrollY > 50;
+    const isLight = document.documentElement.dataset.theme === 'light';
+    const darkBg = scrolled ? 'rgba(1,1,2,0.95)' : 'rgba(1,1,2,0.8)';
+    const lightBg = scrolled ? 'rgba(245,245,244,0.97)' : 'rgba(245,245,244,0.85)';
+    navbar.style.background = isLight ? lightBg : darkBg;
     navbar.style.borderBottom = scrolled ? '1px solid var(--hairline)' : '1px solid transparent';
 }
 
